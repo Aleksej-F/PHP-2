@@ -1,0 +1,15 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/les2/src
+/les1/src
+/les3/code
+/les4/дз
+/les4/src
+/les5/dz
+/les5/code
+/les6/ДЗ
+/les6/src
+/les7/ДЗ
+/les7/src
