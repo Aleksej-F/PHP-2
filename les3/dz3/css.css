@@ -1,0 +1,15 @@
+.container{
+    margin: 0 auto;
+    max-width: 600px;
+    display: flex;
+    flex-wrap: wrap;
+}
+.container-blok{
+    margin: 10px;
+}
+.container-img{
+
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
