@@ -1,29 +1,34 @@
-
-<!-- 2. *Строить фотогалерею, не указывая статичные ссылки к файлам, 
-а просто передавая в функцию построения адрес папки с изображениями. 
-Функция сама должна считать список файлов и построить фотогалерею со ссылками в ней.
- -->
-
 <?php
-             include "function.php";
-        ?>
 
+CONST PHOTO = 'big';
+CONST PHOTO_SMALL = 'small';
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css.css" type="text/css" />
-    <title>Document</title>
-</head>
-<body>
-<div class="container">
-    <?php
-          echo smallImgLoad('small')  
-        ?>
-</div>
-</body>
-</html>
+// подгружаем и активируем авто-загрузчик Twig-а
+require_once 'Twig/Autoloader.php';
+Twig_Autoloader::register();
 
+try {
+  // указываем где хранятся шаблоны
+  $loader = new Twig_Loader_Filesystem('templates');
+  
+  // инициализируем Twig
+  $twig = new Twig_Environment($loader);
+  
+  // подгружаем шаблон
+  $template = $twig->loadTemplate('index.tmpl');
+  
+  // Получаем список фотографий 
+  $photos_in_dir = array_slice(scandir(PHOTO), 2);
+
+  // передаём в шаблон переменные и значения
+  // выводим сформированное содержание
+  echo $template->render(array(
+            'title' => 'Фотографии альбома',
+            'path_to_photo_small' => PHOTO_SMALL,
+            'photos' => $photos_in_dir
+            ));
+  
+} catch (Exception $e) {
+  die ('ERROR: ' . $e->getMessage());
+}
+?>
