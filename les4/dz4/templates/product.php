@@ -5,11 +5,12 @@
         include "../config/config.php";
    } else {
         include "./config/config.php";
+        $id = 0;
    }
   
-   $id = $_GET['id'] or 0;  
+   $id = $_GET['id'] ;  
    
-   $sql = "select * from product where id>'$id' LIMIT 2";
+   $sql = "select * from product where id>'$id' LIMIT 3";
 	$res = mysqli_query($connect,$sql);
 ?>
 
