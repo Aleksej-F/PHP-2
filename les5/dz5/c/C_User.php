@@ -1,1 +1,65 @@
-<?php//// Êîíòòðîëëåð ñòðàíèöû ÷òåíèÿ.//include_once('m/M_User.php');class C_User extends C_Base{	//	// Êîíñòðóêòîð.	//		public function action_auth(){		/*$this-'>title .= '::Àâòîðèçàöèÿ;        $user = new M_User();		$info = "Ïîëüçîâàòåëü íå àâòîðèçîâàí";        if($_POST){            $login = $_POST['login'];            $info = $user->auth("log","past"));		    $this->content = $this->Template('v_auth.php', array('text' => $info));		}		else{		   $this->content = $this->Template('v/v_auth.php');		}		*/		}	}
+<?php
+session_start();
+
+// ÐšÐ¾Ð½Ñ‚Ñ‚Ñ€Ð¾Ð»Ð»ÐµÑ€ ÑÑ‚Ñ€Ð°Ð½Ð¸Ñ†Ñ‹ Ð¿Ð¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»Ñ.
+
+include_once('m/M_User.php');
+
+class C_User extends C_Base
+{
+	
+	
+	public function action_auth(){
+		$this->title .= '::ÐÐ²Ñ‚Ð¾Ñ€Ð¸Ð·Ð°Ñ†Ð¸Ñ';
+      $user = new M_User();
+		// if($this->isPost())
+		// {
+		// 	print_r(' Ð°Ð²Ñ‚Ð¾Ñ€Ð¸Ð·Ð°Ñ†Ð¸Ñ '.$_POST['email'].'   - '. $_POST['pass']);
+		// 	$info = $user->auth($_POST['email'], $_POST['pass']);
+		// 	// text_set($_POST['text']);
+		// 	// header('location: index.php');
+		// 	// exit();
+		// }
+		
+		if($_POST){
+			
+			if ($_POST['login']) {
+				print_r(' 1-gÐ°Ð²Ñ‚Ð¾Ñ€Ð¸Ð·Ð°Ñ†Ð¸Ñ ');
+				$login = $_POST['email']? strip_tags($_POST['email']) : "";
+				$pass = trim(strip_tags($_POST['pass']));
+				$info = $user->auth($login, $pass);
+			
+			}elseif($_POST['avtoriz']){
+				print_r(' 1-Ñ€ÐµÐ³Ð¸ÑÑ‚Ñ€Ð°Ñ†Ð¸Ñ ');
+				$name = trim(strip_tags($_POST['name']));
+				$surname = trim(strip_tags($_POST['surname']));
+				$login = $_POST['email']? trim(strip_tags($_POST['email'])):"";
+				$pass = trim(strip_tags($_POST['pass']));
+				$user->registr($name, $surname, $login, $pass);
+			}
+			
+			elseif($_POST['goout']){
+				print_r(' 1-Ð²Ñ‹Ñ…Ð¾Ð´ ');
+				$user->goout();
+			}
+
+			
+		}
+
+		if (isset($_SESSION['user'])) {
+			$info = "Ð”Ð¾Ð±Ñ€Ð¾ Ð¿Ð¾Ð¶Ð°Ð»Ð¾Ð²Ð°Ñ‚ÑŒ!";
+			$this->content = $this->Template('v/v_profile.php', array('text' => $info));
+		} else {
+			$info = "ÐŸÐ¾Ð»ÑŒÐ·Ð¾Ð²Ð°Ñ‚ÐµÐ»ÑŒ Ð½Ðµ Ð°Ð²Ñ‚Ð¾Ñ€Ð¸Ð·Ð¾Ð²Ð°Ð½!";
+			$this->content = $this->Template('v/v_auth.php', array('text' => $info));
+		}
+		
+		
+		
+
+
+			
+	}
+	
+
+}
