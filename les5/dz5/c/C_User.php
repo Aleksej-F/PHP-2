@@ -5,9 +5,8 @@ session_start();
 
 include_once('m/M_User.php');
 
-class C_User extends C_Base
-{
-	
+class C_User extends C_Base {
+	private $name = " ";
 	
 	public function action_auth(){
 		$this->title .= '::Авторизация';
@@ -24,41 +23,40 @@ class C_User extends C_Base
 		if($_POST){
 			
 			if ($_POST['login']) {
-				print_r(' 1-gавторизация ');
+				//print_r(' 1-авторизация ');
 				$login = $_POST['email']? strip_tags($_POST['email']) : "";
 				$pass = trim(strip_tags($_POST['pass']));
-				$info = $user->auth($login, $pass);
-			
+				$this->name = $user->auth($login, $pass);
+				
+				
+				
 			}elseif($_POST['avtoriz']){
-				print_r(' 1-регистрация ');
+				//print_r(' 2-регистрация ');
 				$name = trim(strip_tags($_POST['name']));
 				$surname = trim(strip_tags($_POST['surname']));
 				$login = $_POST['email']? trim(strip_tags($_POST['email'])):"";
 				$pass = trim(strip_tags($_POST['pass']));
-				$user->registr($name, $surname, $login, $pass);
+				$rez = $user->registr($name, $surname, $login, $pass);
+				if ($rez) {
+					$this->name = 'Вы успешно зарегистрировались';
+				}
 			}
 			
 			elseif($_POST['goout']){
-				print_r(' 1-выход ');
+				//print_r(' 3-выход ');
 				$user->goout();
 			}
-
-			
 		}
 
 		if (isset($_SESSION['user'])) {
-			$info = "Добро пожаловать!";
-			$this->content = $this->Template('v/v_profile.php', array('text' => $info));
+			 $info = "Добро пожаловать!";
+			 $this->content = $this->Template('v/v_profile.php', array('text' => $info,'name' =>$_SESSION['name']. ' '.$_SESSION['surname'].'<br><br>'.$this->name));
+			
 		} else {
 			$info = "Пользователь не авторизован!";
-			$this->content = $this->Template('v/v_auth.php', array('text' => $info));
+			$this->content = $this->Template('v/v_auth.php', array('text' => $info,'name' => $this->name));
 		}
 		
-		
-		
-
-
-			
 	}
 	
 

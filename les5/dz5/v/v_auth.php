@@ -7,6 +7,8 @@
 ?>
 <div class="checkout__head">
 	<h1><?=$text?></h1>
+	<Br>
+	<h3 class="checkout__block-form-h3"><?=$name?></h3>
 </div>
 
 <div class="checkout__block">

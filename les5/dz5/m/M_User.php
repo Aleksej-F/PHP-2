@@ -1,17 +1,14 @@
 <?
 session_start();
-//include "./config/config.php";
+include_once("config/config.php");
 
 
 
 class M_User {
-    private $SERVER = "localhost";
-    private $DB = "php2dz5";
-    private $LOGIN = "root";
-    private $PASS = "";
+    private $config;
 
-    function conect() {
-     return mysqli_connect($this->SERVER,$this->LOGIN,$this->PASS,$this->DB) or die("Error: ".mysqli_error($connect));
+    public function __construct(){
+        $this->config = new Config();
     }
 
     function passv($pass) {
@@ -19,30 +16,50 @@ class M_User {
         $pass = $salt.md5($pass).$salt;
         return $pass;
     }
+
 	function auth($login, $pass){
         
-        $connect = mysqli_connect($this->SERVER,$this->LOGIN,$this->PASS,$this->DB) or die("Error: ".mysqli_error($connect));
-
         $rez = 'falze';
+        $pass = $this->passv($pass);
+        $sql = "select * from user where mail='$login' ";
+       // $connect = $this->config->connect() or die("Error: ".mysqli_error($connect));
+       //$res = mysqli_query($connect,$sql) or die("Error: ".mysqli_error($connect));
+    //    if(mysqli_num_rows($res)){
+    //         $user = mysqli_fetch_assoc($res);
+    //         $rights = $user['rights'];
+    //         $_SESSION['user'] = $rights;
+    //         $_SESSION['name'] = $user['name'];
+    //         $_SESSION['surname'] = $user['surname'];
+    //         $rez = 'true';
+    //     }
+       
+        $connect = $this->config->connectingPDO();
+        $user = $connect->query($sql)->fetch();
+        
+        if($user){
+            // print_r($user['password']);
+            // print_r($user['password']);
+            if ($user['password'] == $pass) {
+                $rights = $user['rights'];
+                $_SESSION['user'] = $rights;
+                $_SESSION['name'] = $user['name'];
+                $_SESSION['surname'] = $user['surname'];
+                return 'Вы успешно авторизовались';
+            }else {
+                return 'Пароль не верный!';
+            }
 
-        //$config = new Config();
-       // $connect = $config->connect();
-	   // print_r( '       M_user  '.  'br');
-       //  print_r( '       M_user  '.$login. '           '.$pass);
-        $pass = $this-> passv($pass);
-        $sql = "select * from user where mail='$login' and password='$pass'";
-        $res = mysqli_query($connect,$sql) or die("Error: ".mysqli_error($connect));
 
-        if(mysqli_num_rows($res)){
-            $user = mysqli_fetch_assoc($res);
-           
             $rights = $user['rights'];
-                        
             $_SESSION['user'] = $rights;
+            $_SESSION['name'] = $user['name'];
+            $_SESSION['surname'] = $user['surname'];
             $rez = 'true';
+        }else {
+            return 'Пользователь с таким логином не зарегистрирован!';
         }
 
-        return $rez;
+        
     }
 
     function goout(){
@@ -50,16 +67,19 @@ class M_User {
     }
 
     function registr($name, $surname, $login, $pass) {
-        $connect =mysqli_connect($this->SERVER,$this->LOGIN,$this->PASS,$this->DB) or die("Error: ".mysqli_error($connect));
+        
+        $connect = $this->config->connect() or die("Error: ".mysqli_error($connect));
+        
         $pass = $this -> passv($pass);
 
         $sql = "INSERT INTO `user` (`id`, `name`, `surname`, `password`, `mail`, `rights`) VALUES (NULL, '$name','$surname','$pass','$login','user')"; 
         $res = mysqli_query($connect,$sql);
-        //print_r(($res));
+        
         if(!$res) {
             die(mysqli_error($connect));
         }
         //return mysqli_fetch_assoc($res);
+        return 'true';
     }
 
 }

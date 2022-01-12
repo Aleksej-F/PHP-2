@@ -6,12 +6,14 @@
 ?>
 <div class="checkout__head">
 	<h1><?=$text?></h1>
+	<Br>
+	<h3 class="checkout__block-form-h3"><?=$name?></h3>
 </div>
 
 <div class="checkout__block">
 	<form name="avtoriz" method="post" class="checkout__block-form">
 		<input type="hidden" name="goout" value="true">
-		<h3 class="checkout__block-form-h3"><?=$name?></h3>
+		
 		<Br>
       <div class="checkout_inp_cont">
 				<b class="shopping-cart_z_4 shopping-cart_z_6"> EMAIL ADDRESS</b>
