@@ -44,6 +44,7 @@ class M_User {
                 $_SESSION['user'] = $rights;
                 $_SESSION['name'] = $user['name'];
                 $_SESSION['surname'] = $user['surname'];
+                $_SESSION['userId'] = $user['id'];
                 return 'Вы успешно авторизовались';
             }else {
                 return 'Пароль не верный!';

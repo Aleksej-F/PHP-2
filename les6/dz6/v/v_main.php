@@ -12,12 +12,12 @@
 <head>
 	<title><?=$title?></title>
 	<meta content="text/html; charset=Windows-1251" http-equiv="content-type">	
-	<link rel="stylesheet" type="text/css" media="screen" href="v/style.css" /> 
+	<link rel="stylesheet" type="text/css" media="screen" href="css/style.css" /> 
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
    <script src="./sc.js"></script>
 	<style>
-    @import "v/style_shop.css" screen; /* Стиль для вывода результата на монитор */
-	 @import "v/details.css" screen;
+    @import "css/style_shop.css" screen; /* Стиль для вывода результата на монитор */
+	 @import "css/details.css" screen;
   </style>
 </head>
 <body>
@@ -27,7 +27,7 @@
 	
 	<div id="menu">
 		<a href="index.php">Главная</a> |
-		<a href="index.php?c=basket&act=edit">Корзина</a> |
+		<a href="index.php?c=basket&act=basket">Корзина</a> |
       <a href="index.php?c=User&act=auth">Профиль</a>
 	</div>
 	

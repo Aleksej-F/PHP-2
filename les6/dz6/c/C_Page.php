@@ -1,6 +1,6 @@
 <?php
 //
-// Конттроллер страницы чтения.
+// Конттроллер страницы каталога.
 //
 include_once('m/M_Page.php');
 
@@ -12,15 +12,8 @@ class C_Page extends C_Base
 	
 	public function action_index(){
 		$catalog = new M_Catalog();
-		
-		
 		$this->title .= '::Главная';
 		$text = $catalog->catalog();
-		
-		//$today = date();
 		$this->content = $this->Template('v/v_catalog.php', array('catalog' => $text));	
 	}
-	
-    
-	
 }

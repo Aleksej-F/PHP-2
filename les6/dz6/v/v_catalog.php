@@ -23,7 +23,7 @@
 						</div>
 					</div>
 					<div class="product-cont-elem-text">
-						<a href="details.php?action=count&img=<?=$data['img']?>&id=<?=$data['id']?>" class="product-cont-elem-text-a">
+              		<a href="index.php?c=details&act=details&id=<?=$data['id']?>" class="product-cont-elem-text-a">
 							<p class="product-cont-img-p1"><?=$data['title']?></p>
 						</a>
 						<div class="product-cont-elem-text-admin">
