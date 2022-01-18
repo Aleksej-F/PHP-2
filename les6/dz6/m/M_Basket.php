@@ -13,11 +13,12 @@ class M_Basket {
    
    function basket($id) {
       $idUser = $_SESSION['userId']? $_SESSION['userId']:0;
-      print_r($idUser);
+      
       $sql="SELECT basket.id_product, basket.count, product.description, product.price, product.img, product.title FROM `basket`JOIN `product` ON basket.id_product = product.id WHERE basket.id_user = $idUser;";
       
       $connect = $this->config->connectingPDO();
       $prod = $connect->query($sql)->fetchAll();
+      
       return $prod;
    }
 

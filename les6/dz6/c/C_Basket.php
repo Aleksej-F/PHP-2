@@ -16,7 +16,7 @@ class C_Basket extends C_Base {
       
       $text = $basket->basket($id);
 
-		$this->content = $this->Template('v/v_basket.php', array('data' => $text));	
+		$this->content = $this->Template('v/v_basket.php', array('basket' => $text));	
 
    }
 }

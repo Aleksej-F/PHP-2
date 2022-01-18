@@ -15,6 +15,7 @@ function send(){
 
 function basket(id){
     let action = 'basket';
+    console.log('jjjj    ',id,'hghjghjgh ',action)
     let str = 'idProduct='+id+'&action='+action;
     $.ajax({
         type: "POST",

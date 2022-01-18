@@ -38,11 +38,12 @@ switch($action){
         if ( !isset($_SESSION['userId'])) {
             
         }   
-        $idUser = $_SESSION['userId']; 
-        print_r($idUser);
-        print_r($basket->basketAddProduct($id, $idUser));
         
-       // header("Location: index.php");
+       
+
+        $basket->basketAddProduct($id, $idUser);
+        
+        header("Location: index.php");
        
     break;    
 
