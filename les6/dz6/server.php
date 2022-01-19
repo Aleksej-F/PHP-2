@@ -2,6 +2,7 @@
 session_start();
 
 include_once('m/M_Basket.php');
+include_once('m/M_User.php');
 //session_start();
 
 $action = $_POST['action'];
@@ -35,11 +36,12 @@ switch($action){
     
     case "basket":
         $basket = new M_Basket();
-        if ( !isset($_SESSION['userId'])) {
-            
+        $user = new M_User();
+        if (!isset($_SESSION['userRights']) && !isset($_SESSION['userId'])) {
+            $user->getUserGuest();
         }   
         
-       
+        $idUser = $_SESSION['userId']?$_SESSION['userId']:0;
 
         $basket->basketAddProduct($id, $idUser);
         
@@ -48,15 +50,10 @@ switch($action){
     break;    
 
     case "delBasket":
-        
-        $sql = "DELETE FROM `basket` WHERE id_user=$idUser and id_product=$id";
-        $res = mysqli_query($connect,$sql) or die("Error: ".mysqli_error($connect));
-       
+        $basket->basketDel($id, $idUser);
         header("Location: shoppingCart.php");
-       
     break;
    
-
     case "countBasket":
         $sql = "select id from basket where id_user=$idUser and id_product=$id;";
         $res = mysqli_query($connect,$sql) or die("Error: ".mysqli_error($connect));
@@ -73,10 +70,9 @@ switch($action){
     break;    
 
     case "clearBasket":
-        $sql = "DELETE FROM `basket` WHERE `basket`.`id_user` = $idUser;";
-        $res = mysqli_query($connect,$sql) or die("Error: ".mysqli_error($connect));
-       
-        header("Location: shoppingCart.php?");
+        $basket = new M_Basket();
+        $basket->basketClear();
+        header("Location: index.php?c=basket&act=basket");
     break;  
     
     case "logIn":
@@ -134,22 +130,5 @@ switch($action){
     default:
         echo "Я не могу такие операции";    
 }
-//создаем гостевую запись
-function getUserGuest($connect){
-    $rnd = rand(1000,5000);
-    $name = "$rnd".date("w").time();
-    $sql = "INSERT INTO `user` (`id`, `name`, `surname`, `password`, `phone`, `mail`, `rights`) VALUES (NULL, '$name', '1','1', '1','1','guest')"; 
-    $res = mysqli_query($connect,$sql);
-    $sql = "select id, rights from user where name='$name' and rights='guest'";
-    $res = mysqli_query($connect,$sql) or die("Error: ".mysqli_error($connect));
 
-    if(mysqli_num_rows($res)){
-        $user = mysqli_fetch_assoc($res);
-        $_SESSION['userId'] = $user['id'];
-        $_SESSION['userRights'] = $user['rights'];
-       
-        setcookie("userId",$user['id']);
-        setcookie("userRights",$user['rights']);
-    }
-};
   

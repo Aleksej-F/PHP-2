@@ -42,6 +42,7 @@ class M_User {
             if ($user['password'] == $pass) {
                 $rights = $user['rights'];
                 $_SESSION['user'] = $rights;
+                $_SESSION['userRights'] = $user['rights'];
                 $_SESSION['name'] = $user['name'];
                 $_SESSION['surname'] = $user['surname'];
                 $_SESSION['userId'] = $user['id'];
@@ -49,13 +50,6 @@ class M_User {
             }else {
                 return 'Пароль не верный!';
             }
-
-
-            $rights = $user['rights'];
-            $_SESSION['user'] = $rights;
-            $_SESSION['name'] = $user['name'];
-            $_SESSION['surname'] = $user['surname'];
-            $rez = 'true';
         }else {
             return 'Пользователь с таким логином не зарегистрирован!';
         }
@@ -81,6 +75,25 @@ class M_User {
         }
         //return mysqli_fetch_assoc($res);
         return 'true';
+    }
+
+    //создаем гостевую запись
+    function getUserGuest(){
+        $rnd = rand(1000,5000);
+        $name = "$rnd".date("w").time();
+        $sql = "INSERT INTO `user` (`id`, `name`, `surname`, `password`, `phone`, `mail`, `rights`) VALUES (NULL, '$name', '1','1', '1','1','guest')"; 
+                
+        $connect = $this->config->connectingPDO();
+        $connect->query($sql)->fetch();
+        
+        $sql = "select id, rights from user where name='$name' and rights='guest'";
+        $res = $connect->query($sql)->fetch();
+
+        if($res){
+            
+            $_SESSION['userId'] = $user['id'];
+            $_SESSION['userRights'] = $user['rights'];
+        }
     }
 
 }

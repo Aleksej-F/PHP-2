@@ -6,16 +6,15 @@ include_once("config/config.php");
 
 class M_Basket {
    private $config;
+   private $idUser;
 
    public function __construct(){
       $this->config = new Config();
+      $this->idUser = $_SESSION['userId']? $_SESSION['userId']:0;
    }
    
    function basket($id) {
-      $idUser = $_SESSION['userId']? $_SESSION['userId']:0;
-      
-      $sql="SELECT basket.id_product, basket.count, product.description, product.price, product.img, product.title FROM `basket`JOIN `product` ON basket.id_product = product.id WHERE basket.id_user = $idUser;";
-      
+      $sql="SELECT basket.id_product, basket.count, product.description, product.price, product.img, product.title FROM `basket`JOIN `product` ON basket.id_product = product.id WHERE basket.id_user = $this->idUser;";
       $connect = $this->config->connectingPDO();
       $prod = $connect->query($sql)->fetchAll();
       
@@ -28,7 +27,7 @@ class M_Basket {
       $connect = $this->config->connectingPDO();
      
       $res = $connect->query($sql)->fetch();
-      print_r($res);
+      //print_r($res);
       if(($res)){
          $sql = "UPDATE `basket` SET `count` = count+1 WHERE id_user=$idUser and id_product=$id;";
          $connect->query($sql);
@@ -44,13 +43,19 @@ class M_Basket {
 			}
          return "товар добавлен в корзину";
       }
-      
-      
-      
-      
-      
-      
-      
+   }
+
+   function basketDel($id, $idUser){
+      $sql = "DELETE FROM `basket` WHERE id_user=$idUser and id_product=$id";
+      $connect = $this->config->connectingPDO();
+      $connect->exec($sql);
+   }
+
+   function basketClear(){
+     // $idUser = $_SESSION['userId']? $_SESSION['userId']:0;
+      $sql = "DELETE FROM `basket` WHERE `basket`.`id_user` = $this->idUser";
+      $connect = $this->config->connectingPDO();
+      $res = $connect->exec($sql);
    }
 
 }

@@ -13,10 +13,7 @@ class C_Basket extends C_Base {
 		$this->title .= '::Корзина';
       $basket = new M_Basket();
       $id=$_GET['id'];
-      
       $text = $basket->basket($id);
-
-		$this->content = $this->Template('v/v_basket.php', array('basket' => $text));	
-
+      $this->content = $this->Template('v/v_basket.php', array('basket' => $text));	
    }
 }

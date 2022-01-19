@@ -76,7 +76,8 @@ function clearBasket() {
             url: "server.php",
             data: str,
             success: function(answer){
-                $('body').html(answer);
+                console.log('очистка корзины', answer)
+                //$('body').html(answer);
             }
         });
     }
