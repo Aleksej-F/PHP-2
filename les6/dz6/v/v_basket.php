@@ -15,7 +15,9 @@
 			
 					
                 $total = 0;
+					 
                 if (isset($basket)) {
+						
                   foreach ($basket as $reviews):?>
 
                 <div class="shopping-cart_grid">
@@ -44,9 +46,9 @@
                 </div>
                 <div class="shopping-cart_grid_separator"></div>
                 <?php  $total = $total + $reviews['price'] * $reviews['count'];?> 
-			<?php endforeach;}?>
-
-			
+			<?php endforeach;}?> 
+				<h3 class="shopping-cart_z"><?=$basketText?></h3>
+				
             <div class="shopping-cart_button">
 				<div class="shopping-cart_button_1" onclick="clearBasket()">
 					<p>cLEAR SHOPPING CART</p>
@@ -83,7 +85,7 @@
 						<h3 class="shopping-cart_z_3">$<?=$total?></h3>
 					</div>
 					<div class="shopping-cart_col_separator"></div>
-					<a href="checkout.php">
+					<a href="index.php?c=User&act=auth">
 						<div class="shopping-cart_button_4">
 							<p>proceed to checkout</p>
 						</div>

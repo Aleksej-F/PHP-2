@@ -3,7 +3,11 @@ session_start();
 
 include_once('m/M_Basket.php');
 include_once('m/M_User.php');
-//session_start();
+include_once('c/C_Basket.php');
+
+$basket = new M_Basket();
+$user = new M_User();
+$controls = new C_Basket();
 
 $action = $_POST['action'];
 $reviews = $_POST['reviews'];
@@ -16,6 +20,7 @@ $obkt = $_POST['obkt'];
 // $_SESSION['error'] ='';
 //$_SESSION['userId'] = $user['id'];
 //$_SESSION['userRights'] = $user['rights'];
+
 switch($action){
     case "отправить":
         if (isset($_SESSION['userRights']) && $_SESSION['userRights']==='user') {
@@ -35,8 +40,7 @@ switch($action){
     break;
     
     case "basket":
-        $basket = new M_Basket();
-        $user = new M_User();
+       
         if (!isset($_SESSION['userRights']) && !isset($_SESSION['userId'])) {
             $user->getUserGuest();
         }   
@@ -45,34 +49,26 @@ switch($action){
 
         $basket->basketAddProduct($id, $idUser);
         
-        header("Location: index.php");
+       // header("Location: index.php");
        
     break;    
 
-    case "delBasket":
+    case "delBasketProduct":
         $basket->basketDel($id, $idUser);
-        header("Location: shoppingCart.php");
+        $text = $controls->update_basket();
+        echo $text;
     break;
    
     case "countBasket":
-        $sql = "select id from basket where id_user=$idUser and id_product=$id;";
-        $res = mysqli_query($connect,$sql) or die("Error: ".mysqli_error($connect));
-        if(mysqli_num_rows($res)){
-            $sql = "UPDATE `basket` SET `count` = $count WHERE id_user=$idUser and id_product=$id;";
-            $res = mysqli_query($connect,$sql);
-            //echo "колличество товаров изменено!";
-        }else {
-            $sql = "INSERT INTO `basket` (`id`, `id_user`, `id_product`, `count`) VALUES (NULL, $idUser, $id, 1)";
-            $res = mysqli_query($connect,$sql);
-           // echo "товар добавлен в корзину";
-        }
-        header("Location: shoppingCart.php?id=$id");
+        $basket->basketCount($idUser,$id,$count);
+        $text = $controls->update_basket();
+        echo $text;
     break;    
 
     case "clearBasket":
-        $basket = new M_Basket();
         $basket->basketClear();
-        header("Location: index.php?c=basket&act=basket");
+        $text = $controls->update_basket();
+        echo $text;
     break;  
     
     case "logIn":
@@ -92,7 +88,7 @@ switch($action){
             $rights = $user['rights'];
             $sql = "select * from basket where id_user=$idUser ;";
             
-             $res = mysqli_query($connect,$sql) or die("Error: ".mysqli_error($connect));
+            $res = mysqli_query($connect,$sql) or die("Error: ".mysqli_error($connect));
            
             print_r($res);
             //exit;

@@ -12,18 +12,9 @@ class M_Catalog {
    }
 
    function catalog() {
-     
       $sql = " select * from product";
       $connect = $this->config->connectingPDO();
       $catalog = $connect->query($sql)->fetchAll();
       return $catalog;
-  }
-
-
-
-
-
-
-
-
+   }
 }

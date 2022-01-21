@@ -11,16 +11,7 @@ class C_User extends C_Base {
 	public function action_auth(){
 		$this->title .= '::Авторизация';
       $user = new M_User();
-		
-		// if($this->isPost())
-		// {
-		// 	print_r(' авторизация '.$_POST['email'].'   - '. $_POST['pass']);
-		// 	$info = $user->auth($_POST['email'], $_POST['pass']);
-		// 	// text_set($_POST['text']);
-		// 	// header('location: index.php');
-		// 	// exit();
-		// }
-		
+				
 		if($_POST){
 			
 			if ($_POST['login']) {
@@ -31,13 +22,22 @@ class C_User extends C_Base {
 				
 				
 				
-			}elseif($_POST['avtoriz']){
-				//print_r(' 2-регистрация ');
+			}elseif($_POST['registr']){
+				print_r(' 2-регистрация ');
+				$login = trim(strip_tags($_POST['email']));
+				$rez = $user->getUserRegMail($login);
+				if ($rez) {
+					$this->name = 'Пользователь с таким email уже зарегистрирован!';
+					$this->content = $this->Template('v/v_register.php', array('text' => $info,'name' => $this->name));
+					return;
+				}
+				
 				$name = trim(strip_tags($_POST['name']));
 				$surname = trim(strip_tags($_POST['surname']));
-				$login = $_POST['email']? trim(strip_tags($_POST['email'])):"";
+				
 				$pass = trim(strip_tags($_POST['pass']));
-				$rez = $user->registr($name, $surname, $login, $pass);
+				$phone = trim(strip_tags($_POST['phone']));
+				$rez = $user->registr($name, $surname, $phone ,$login, $pass);
 				if ($rez) {
 					$this->name = 'Вы успешно зарегистрировались';
 				}
@@ -55,9 +55,49 @@ class C_User extends C_Base {
 			
 		} else {
 			$info = "Пользователь не авторизован!";
-			$this->content = $this->Template('v/v_auth.php', array('text' => $info,'name' => $this->name));
-		}
+			$this->content = $this->Template('v/v_checkout.php', array('text' => $info,'name' => $this->name));
+		}//v/v_checkout.php   v/v_auth.php
 		
+	}
+	//переход на страницу регистрации
+	public function action_registr(){
+		$this->title .= '::Регистрация';
+      $user = new M_User();
+		
+		
+		if($_POST){
+			//запрос на регистрацию
+			if($_POST['registr']){
+				print_r(' 2-регистрация ');
+				$login = trim(strip_tags($_POST['email']));
+				$rez = $user->getUserRegMail($login);
+				print_r('проверка уникальности - ');
+				print_r($rez);
+				if ($rez) {
+					$this->name = 'Пользователь с таким email уже зарегистрирован!';
+					$this->content = $this->Template('v/v_register.php', array('text' => $info,'name' => $this->name));
+					return;
+				}
+				
+				$name = trim(strip_tags($_POST['name']));
+				$surname = trim(strip_tags($_POST['surname']));
+				$phone = trim(strip_tags($_POST['phone']));
+				$pass = trim(strip_tags($_POST['pass']));
+
+				print_r('регистрирую');
+				$rez = $user->getUserRegistr($name, $surname, $phone ,$login, $pass);
+
+				print_r('результат регистрации -');
+				print_r($rez);
+				if ($rez) {
+					$this->name = 'Вы успешно зарегистрировались';
+				}
+			}
+
+		}
+
+		$this->content = $this->Template('v/v_register.php', array('text' => $info,'name' => $this->name));
+	
 	}
 	
 

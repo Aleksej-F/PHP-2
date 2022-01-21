@@ -1,9 +1,7 @@
 
 
-body
-{
-	font-family: Georgia;
-	font-size: 12px;
+*{
+	padding: 0;
 	margin: 0;
 }
 
@@ -23,50 +21,46 @@ textarea
 	height: 300px;
 }
 
-#header
-{
-	padding: 10px;
-	background: #eee;
-}
+
 
 #menu
 {
 	padding: 10px;
 	background: #ccc;
+	text-align: center;
+}
+.menu_hed{
+	text-align:left;
+}
+.wrap_menu{
+	width: 1140px;
+    margin: 0 auto;
 }
 
-#content
-{
-	margin: 5px;
-	padding: 10px;
-	border: 1px dotted #999;
-}
-
-#footer
-{
-	padding: 10px;
-	background: #ccc;
-}
 .checkout__head{
 	text-align: center;
-
 }
+
 .checkout__block{
 	display: flex;
 	justify-content: center;
 }
+
 .checkout__block-form{
 	margin: 10px 54px;
-   width: 300px;
+   width: 400px;
 }
+
 .checkout__block-form-h3{
 	font-size: 20px;
 }
+
 .checkout_inp_forgot{
 	margin-top: 20px;
 	width: 350px;
 	display: flex;
 }
+
 .checkout__block-form-button{
 	width: 180px;
   height: 40px;
@@ -95,6 +89,7 @@ textarea
 	text-transform: uppercase;
 	color: #4a4a4a;
 }
+
 .checkout__block-form-button p{
 	font-size: 14px;
 	font-family: Lato;
@@ -104,10 +99,12 @@ textarea
 	text-transform: uppercase;
 	color: #4a4a4a;
 }
+
 .checkout__block-form-button:hover{
 	cursor: pointer;
 	border: 1px solid #181818;
 }
+
 .checkout_inp_cont{
 	margin-top: 10px;
 }

@@ -2449,7 +2449,7 @@ input[type=range]::-webkit-slider-thumb {
   cursor: pointer;
   -webkit-transition: all 0.5s;
   transition: all 0.5s;
-  margin-top: 38px;
+  margin-top: 50px;
   transition: all 0.5s;
 }
 

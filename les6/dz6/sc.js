@@ -22,20 +22,20 @@ function basket(id){
         url: "server.php",
         data: str,
         success: function(answer){
-           $('body').html(answer);
+           //$('body').html(answer);
         }
     });
 }
 
-function delProductBasket(idPr){
-    let action = 'delBasket';
-    let str = 'idProduct='+idPr+'&action='+action;
+function delProductBasket(id){
+    let action = 'delBasketProduct';
+    let str = 'idProduct='+id+'&action='+action;
     $.ajax({
         type: "POST",
         url: "server.php",
         data: str,
         success: function(answer){
-            $('body').html(answer);
+            $('#content').html(answer);
         }
     });
 }
@@ -60,8 +60,9 @@ function countBasket(id, count){
         url: "server.php",
         data: str,
         success: function(answer){
-           // не понял как можно сделать обновление только в корзине, обновляю всю страницу
-            $('body').html(answer);
+          
+           // console.log(answer)
+           $('#content').html(answer);
         }
     });
 }
@@ -76,8 +77,8 @@ function clearBasket() {
             url: "server.php",
             data: str,
             success: function(answer){
-                console.log('очистка корзины', answer)
-                //$('body').html(answer);
+               // console.log('очистка корзины', answer)
+                $('#content').html(answer);
             }
         });
     }

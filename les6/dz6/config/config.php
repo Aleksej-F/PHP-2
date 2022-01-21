@@ -13,4 +13,13 @@ class Config{
   public function connectingPDO () {
     return new PDO($this->DRIVER . ':host='. $this->SERVER . ';dbname=' . $this->DB, $this->LOGIN, $this->PASS);
   }
+
+
+  public function ConsoleAlert($errors){
+    ?>
+    <script>
+        console.log('<?=$errors?>');
+    </script>
+    <?php
+ }
 }
