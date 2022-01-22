@@ -2,9 +2,9 @@
 //
 // Конттроллер страницы каталога.
 //
-include_once('m/M_Page.php');
+//include_once('m/M_Page.php');
 
-class C_Page extends C_Base
+class C_Catalog extends C_Base
 {
 	//
 	// нет конструктора в C_BASE, поэтому убрали конструктор из текущего класса

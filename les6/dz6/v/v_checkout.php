@@ -14,6 +14,7 @@
 
 		<section class="checkout">
 			<div class="wrap checkout_wrap">
+				<h3 class="checkout__block-form-h3"><?=$text?></h3><Br><Br>
 				<?php
 				
 				if(isset($_SESSION['userRights']) && $_SESSION['userRights']==='admin'):?>
@@ -82,29 +83,37 @@
 										</div>
 									</a>
 								</form>
-								<form name="test" method="post">
-									<p><?=$message?$message:"";?> </p>
+								<form name="register" method="post">
+									
+									<input type="hidden" name="login" value="true">
 									<h3 class="shopping-cart_z_4">Already registed?</h3>
 									<b class="shopping-cart_z_5">Please log in below</b><Br><Br>
 									<div class="checkout_inp_cont">
 										<b class="shopping-cart_z_4 shopping-cart_z_6"> EMAIL ADDRESS</b>
 										<b class="shopping-cart_z_4 shopping-cart_z_7">*</b>
 									</div>
-									<input type="email" class="email" placeholder="" required pattern="\S+@[a-z]+.[a-z]+" id="logMail">
+									<input type="email" class="email" name="email" placeholder="" required pattern="\S+@[a-z]+.[a-z]+" id="logMail">
 									<div class="checkout_inp_cont">
 										<b class="shopping-cart_z_4 shopping-cart_z_6">PASSWORD</b>
 										<b class="shopping-cart_z_7">*</b>
 									</div>
-									<input class="email" type="password" placeholder required id="logPass">
+									<input class="email" type="password" name="pass" placeholder required id="logPass">
 									
 									<div class="checkout_inp_cont">
 										<b class="shopping-cart_z_7 shopping-cart_z_8">* Required Fileds</b>
 									</div>
+									<p><?=$message?$message:"  ";?> </p>
 									<div class="checkout_inp_forgot">
-										<div class="shopping-cart_button_5" onclick="logIn()">
-											<p>Log in</p>
-										</div>
-										<a href="#" class="shopping-cart_z_9"><b >Forgot Password ?</b></a>
+										
+										<!--
+											<div class="checkout_inp_forgot">
+											<input class="shopping-cart_button_5" type="submit" value="Log in"/>
+											</div>
+											-->
+											<div class="shopping-cart_button_5" onclick="logIn()">
+												<p>Log in</p>
+											</div>
+											<a href="#" class="shopping-cart_z_9"><b >Forgot Password ?</b></a>
 									</div>
 									<div id="h1"></div>
 								</form>

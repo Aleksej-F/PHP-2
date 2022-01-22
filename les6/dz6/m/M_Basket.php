@@ -1,6 +1,6 @@
 <?
 session_start();
-include_once("config/config.php");
+//include_once("config/config.php");
 
 
 
@@ -9,7 +9,7 @@ class M_Basket {
    private $idUser;
 
    public function __construct(){
-      $this->config = new Config();
+      $this->config = new K_Config();
       $this->idUser = $_SESSION['userId']? $_SESSION['userId']:0;
    }
    

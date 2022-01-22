@@ -1,7 +1,13 @@
 <?php
-
+session_start();
 spl_autoload_register (function ($classname){
-	include_once("c/$classname.php");
+	if (substr($classname, 0, 1)== 'C'){
+		include_once("c/$classname.php");
+   }elseif (substr($classname, 0, 1)== 'M'){
+      include_once("m/$classname.php");
+   }elseif (substr($classname, 0, 1)== 'K'){
+      include_once("config/$classname.php");
+   }
 });
 
 
@@ -22,7 +28,7 @@ switch ($_GET['c'])
 		$controller = new C_Details();
 		break;
 	default:
-		$controller = new C_Page();
+		$controller = new C_Catalog();
 }
 
 $controller->Request($action);

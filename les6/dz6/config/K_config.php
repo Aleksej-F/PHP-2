@@ -1,5 +1,5 @@
 <?php
-class Config{
+class K_Config{
   private $DRIVER = "mysql";
   private $SERVER = "localhost";
   private $DB = "brand_shop";
@@ -11,6 +11,7 @@ class Config{
   }
 
   public function connectingPDO () {
+    
     return new PDO($this->DRIVER . ':host='. $this->SERVER . ';dbname=' . $this->DB, $this->LOGIN, $this->PASS);
   }
 

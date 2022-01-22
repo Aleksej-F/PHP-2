@@ -1,9 +1,15 @@
 <?php
 session_start();
 
-include_once('m/M_Basket.php');
-include_once('m/M_User.php');
-include_once('c/C_Basket.php');
+spl_autoload_register (function ($classname){
+	if (substr($classname, 0, 1)== 'C'){
+		include_once("c/$classname.php");
+    } elseif (substr($classname, 0, 1)== 'M'){
+        include_once("m/$classname.php");
+    }elseif (substr($classname, 0, 1)== 'K'){
+        include_once("config/$classname.php");
+    }
+});
 
 $basket = new M_Basket();
 $user = new M_User();
@@ -15,6 +21,8 @@ $id = $_POST['idProduct'];
 $idUser = $_SESSION['userId']?$_SESSION['userId']:0;
 $count = $_POST['count'];
 $obkt = $_POST['obkt'];
+$login = $_POST['email'];
+$pass = $_POST['pass'];
 //print_r($reviews);
 // $_SESSION['rez'] = '';
 // $_SESSION['error'] ='';
@@ -40,15 +48,17 @@ switch($action){
     break;
     
     case "basket":
-       
+        print_r('добавить товар в корзину');
+        print_r($_SESSION);
         if (!isset($_SESSION['userRights']) && !isset($_SESSION['userId'])) {
+            print_r('авторизации нет');
             $user->getUserGuest();
         }   
-        
+        print_r($_SESSION);
         $idUser = $_SESSION['userId']?$_SESSION['userId']:0;
 
         $basket->basketAddProduct($id, $idUser);
-        
+        echo $_SESSION;
        // header("Location: index.php");
        
     break;    
@@ -72,52 +82,11 @@ switch($action){
     break;  
     
     case "logIn":
-        
-        $mail = $_POST['mail'] ? strip_tags($_POST['mail']) : "";
-        $salt = "sldfjsklfdj23lfd0,.sd";
-        $pass = trim(strip_tags($_POST['pass']));
-        $pass = $salt.md5($pass).$salt;
-        
-        $sql = "select id, rights from user where mail='$mail' and password='$pass'";
-        $res = mysqli_query($connect,$sql) or die("Error: ".mysqli_error($connect));
-       
-        //print_r( mysqli_fetch_assoc($res));
-        if(mysqli_num_rows($res)){
-            $user = mysqli_fetch_assoc($res);
-            $userIdAuthorized = $user['id'];
-            $rights = $user['rights'];
-            $sql = "select * from basket where id_user=$idUser ;";
-            
-            $res = mysqli_query($connect,$sql) or die("Error: ".mysqli_error($connect));
-           
-            print_r($res);
-            //exit;
-            //while($reviews = mysqli_fetch_assoc($res))
-            
-            if(mysqli_num_rows($res)){
-                $n = mysqli_num_rows($res);
-                for($i = 0; $i < $n; $i++) {
-                    $row = mysqli_fetch_assoc($result);
-                    $id =  $row['id'];
-                    setcookie("$id", $id);
-                    $sql = "UPDATE `basket` SET `id_user` = $userIdAuthorized WHERE id=$id;";
-                    $res = mysqli_query($connect,$sql);
-                }
-            }
-
-            $_SESSION['userId'] = $userIdAuthorized;
-            $_SESSION['userRights'] = $rights;
-                       
-            setcookie("userId",$user['id']);
-            setcookie("userRights",$user['rights']);
-            header("Location: checkout.php?success=true");
-            //  echo "{session:true, rights: {$rights}}";
-            //  echo "true";
-        }else {
-            header("Location: checkout.php?success=false");
-            // echo "false";
-        }
+        $rez = $user->auth($login, $pass);
+        //$text = $controlsUser->update_basket($rez);
+        echo $rez.' - '.$login . " -   ". $pass;
     break; 
+    
     case "goOut":
         $_SESSION = [];
         header("Location: checkout.php?success=false");

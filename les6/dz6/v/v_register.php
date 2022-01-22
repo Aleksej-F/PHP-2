@@ -2,12 +2,18 @@
 		<div class="wrap checkout_wrap">
 		<?		
         if (isset($_SESSION['userRights']) && $_SESSION['userRights']!=='guest' ) {?>
-            <h1 class="shopping-cart_z_4">You have already logged in.</h1><Br><Br>
+            <h3 class="checkout__block-form-h3"><?=$name?></h3><Br><Br>
+				<a href="index.php?c=User&act=auth" >
+					<div class="shopping-cart_button_5" >
+						<p>Log in</p>
+					</div>
+				</a>
 			<? } else { ?>
 			<details open> 
 				<summary class="shopping-cart_z">Register with us for future convenience</summary>
                   <Br>
 	               <h3 class="checkout__block-form-h3"><?=$name?></h3>
+						<Br>
                <div class="checkout_summary_cont">
 						
 						<form name="avtoriz"  method="post" enctype="multipart/form-data" >

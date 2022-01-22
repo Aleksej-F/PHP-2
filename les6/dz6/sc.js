@@ -23,6 +23,7 @@ function basket(id){
         data: str,
         success: function(answer){
            //$('body').html(answer);
+           console.log(answer)
         }
     });
 }
@@ -94,10 +95,10 @@ function сontinueСheckout() {
 }
 
 function logIn(){
-    let mail = $('#logMail').val();//document.getElementById('login').value
+    let email = $('#logMail').val();//document.getElementById('login').value
     let pass = $('#logPass').val();
     let action = 'logIn';
-    let str = 'mail='+mail+'&pass='+pass+'&action='+action;
+    let str = 'email='+email+'&pass='+pass+'&action='+action;
     
     $.ajax({
         type: "POST",
@@ -105,13 +106,13 @@ function logIn(){
         data: str,
         success: function(answer){
           console.log(answer)
-          $('body').html(answer);  
+          $('#content').html(answer);  
         }
     });
 
 }
 
-//UPDATE `basket` SET `id_user` = 35 WHERE id=(select id from basket where id_user=32);
+
 
 function goOut(){
    

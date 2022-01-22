@@ -3,7 +3,7 @@ session_start();
 
 // Конттроллер страницы информации о продукте.
 
-include_once('m/M_Details.php');
+//include_once('m/M_Details.php');
 
 class C_Details extends C_Base {
 
