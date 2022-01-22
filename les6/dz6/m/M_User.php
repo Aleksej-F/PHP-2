@@ -20,13 +20,30 @@ class M_User {
         $sql = "select * from user where mail='$login' ";
         $connect = $this->config->connectingPDO();
         $user = $connect->query($sql)->fetch();
-        print_r($user);
+        
         if($user){
             // print_r($user['password']);
             // print_r($user['password']);
             if ($user['password'] == $pass) {
-                $rights = $user['rights'];
-                $_SESSION['user'] = $rights;
+               //id гостевой записи
+                $us = $_SESSION['userId'];
+                //id авторизовывающегося пользователя
+                $userIdAuthorized = $user['id'];
+                $sql = "select * from basket where id_user=$us";
+                $basket = $connect->query($sql);
+                if ($basket) {
+                    $basket = $basket->fetchAll();
+                    
+                    $n = count($basket);
+                    for($i = 0; $i < $n; $i++) {
+                        $row = $basket[$i];
+                        $id =  $row['id'];
+                        $sql = "UPDATE `basket` SET `id_user` = $userIdAuthorized WHERE id=$id;";
+                        $connect->query($sql);
+                    }
+                }
+                
+                $_SESSION['user'] = $user['rights'];
                 $_SESSION['userRights'] = $user['rights'];
                 $_SESSION['name'] = $user['name'];
                 $_SESSION['surname'] = $user['surname'];
@@ -65,15 +82,19 @@ class M_User {
 
         $rnd = rand(1000,5000);
         $name = "$rnd-".date("w").time();
-        $sql = "INSERT INTO `user` (`id`, `name`, `surname`, `password`, `phone`, `mail`, `rights`) VALUES (NULL, '$name', '1','1', '1','1','guest')"; 
+        $sql = "INSERT INTO `user` (`id`, `name`, `surname`, `password`, `phone`, `mail`, `rights`) VALUES (NULL, $name, '1','1', '1','1','guest')"; 
            print_r('</br>'.'создаю гостевую запись'.'</br>'); 
-           print_r($this->config); 
+           
         $connect = $this->config->connectingPDO();
-        $connect->query($sql);
-        
-        $sql = "select id, rights from user where name='$name' and rights='guest'";
+        $q = $connect->query($sql);
+        print_r($q); 
+        if ($q->errorCode() != PDO::ERR_NONE) {
+            $info = $q->errorInfo();
+            die($info[2]);
+        }
+        $sql = "select id, rights from user where name=$name and rights='guest'";
         $user = $connect->query($sql)->fetch();
-
+        print_r($user);
         if($user){
             $_SESSION['userId'] = $user['id'];
             $_SESSION['userRights'] = $user['rights'];

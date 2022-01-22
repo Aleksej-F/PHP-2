@@ -14,6 +14,7 @@ spl_autoload_register (function ($classname){
 $basket = new M_Basket();
 $user = new M_User();
 $controls = new C_Basket();
+$controlsUser = new C_User();
 
 $action = $_POST['action'];
 $reviews = $_POST['reviews'];
@@ -23,11 +24,7 @@ $count = $_POST['count'];
 $obkt = $_POST['obkt'];
 $login = $_POST['email'];
 $pass = $_POST['pass'];
-//print_r($reviews);
-// $_SESSION['rez'] = '';
-// $_SESSION['error'] ='';
-//$_SESSION['userId'] = $user['id'];
-//$_SESSION['userRights'] = $user['rights'];
+
 
 switch($action){
     case "отправить":
@@ -48,19 +45,11 @@ switch($action){
     break;
     
     case "basket":
-        print_r('добавить товар в корзину');
-        print_r($_SESSION);
         if (!isset($_SESSION['userRights']) && !isset($_SESSION['userId'])) {
-            print_r('авторизации нет');
             $user->getUserGuest();
         }   
-        print_r($_SESSION);
         $idUser = $_SESSION['userId']?$_SESSION['userId']:0;
-
         $basket->basketAddProduct($id, $idUser);
-        echo $_SESSION;
-       // header("Location: index.php");
-       
     break;    
 
     case "delBasketProduct":
@@ -83,8 +72,8 @@ switch($action){
     
     case "logIn":
         $rez = $user->auth($login, $pass);
-        //$text = $controlsUser->update_basket($rez);
-        echo $rez.' - '.$login . " -   ". $pass;
+        $text = $controlsUser->update_auth($rez);
+        echo $text;
     break; 
     
     case "goOut":

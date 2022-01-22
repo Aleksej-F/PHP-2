@@ -19,9 +19,6 @@ class C_User extends C_Base {
 				$login = $_POST['email']? strip_tags($_POST['email']) : "";
 				$pass = trim(strip_tags($_POST['pass']));
 				$this->name = $user->auth($login, $pass);
-				
-				
-				
 			}elseif($_POST['goout']){
 				//print_r(' 3-выход ');
 				$user->goout();
@@ -79,5 +76,12 @@ class C_User extends C_Base {
 	
 	}
 	
-
+	//обновление страницы авторизации
+	public function update_auth($text){
+		$this->title .= '::Авторизация';
+     
+		
+		return $this->Template('v/v_checkout.php', array('text' => $info,'name' => $text));
+	}
+	
 }

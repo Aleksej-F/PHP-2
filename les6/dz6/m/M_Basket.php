@@ -13,6 +13,7 @@ class M_Basket {
       $this->idUser = $_SESSION['userId']? $_SESSION['userId']:0;
    }
    
+   //запрос состаяний корзины
    function basket($idUser) {
       $sql="SELECT basket.id_product, basket.count, product.description, product.price, product.img, product.title FROM `basket`JOIN `product` ON basket.id_product = product.id WHERE basket.id_user = $idUser;";
       $connect = $this->config->connectingPDO();
@@ -49,8 +50,8 @@ class M_Basket {
       $connect->exec($sql);
    }
 
-   function basketClear(){
-      $sql = "DELETE FROM `basket` WHERE `basket`.`id_user` = $this->idUser";
+   function basketClear($idUser){
+      $sql = "DELETE FROM `basket` WHERE `basket`.`id_user` = $idUser";
       $connect = $this->config->connectingPDO();
       $res = $connect->exec($sql);
    }

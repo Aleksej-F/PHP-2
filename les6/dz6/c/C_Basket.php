@@ -16,20 +16,16 @@ class C_Basket extends C_Base {
   
    public function action_basket(){
 		$this->title .= '::Корзина';
-     
       $idUser = $_SESSION['userId']?$_SESSION['userId']:0;
       $text = $this->basketM->basket($idUser);
       $basketText = (count($text) > 0) ? '':'В корзине нет товаров'; 
-         
       $this->content = $this->Template('v/v_basket.php', array('basket' => $text, 'basketText' => $basketText));	
    }
 
    public function update_basket(){
-		      
-      $idUser = $_SESSION['userId']?$_SESSION['userId']:0;
+		$idUser = $_SESSION['userId']?$_SESSION['userId']:0;
       $text = $this->basketM->basket($idUser);
       $basketText = (count($text) > 0) ? '':'В корзине нет товаров'; 
-         
       return $this->Template('v/v_basket.php', array('basket' => $text, 'basketText' => $basketText));	
    }
 }
