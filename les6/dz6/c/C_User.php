@@ -9,13 +9,11 @@ class C_User extends C_Base {
 	private $name = " ";
 	
 	public function action_auth(){
-		$this->title .= '::Авторизация';
-      $user = new M_User();
-		
+		$user = new M_User();
 		if($_POST){
-			
+			$this->title .= '::Авторизация';
 			if ($_POST['login']) {
-				print_r(' 1-авторизация ');
+				//print_r(' 1-авторизация ');
 				$login = $_POST['email']? strip_tags($_POST['email']) : "";
 				$pass = trim(strip_tags($_POST['pass']));
 				$this->name = $user->auth($login, $pass);
@@ -23,20 +21,21 @@ class C_User extends C_Base {
 				//print_r(' 3-выход ');
 				$user->goout();
 			}
-			
 		}
 		
 		if (isset($_SESSION['user'])) {
-			 $info = $_POST['login'].'    - '. $_POST['email'] ;
-			 $this->content = $this->Template('v/v_profile.php', array('text' => $info,'name' =>$_SESSION['name']. ' '.$_SESSION['surname'].'<br><br>'.$this->name));
+			$this->title .= '::Личный кабинет';
+			$info = 'Добро пожаловать в личный кабинет.' ;
+			$this->content = $this->Template('v/v_checkout.php', array('text' => $info,'name' =>$_SESSION['name']. ' '.$_SESSION['surname'].'<br><br>'.$this->name));
 			
 		} else {
-			$info = "Пользователь не авторизован!   - ". $_SESSION['user'].'  -'.$_POST['email'];;
+			$this->title .= '::Авторизация';
+			$info = "Вы не авторизованы.<br> Пройдите регистрацию или авторизуйтесь!   - ". $_SESSION['user'].'  -'.$_POST['email'];
 			$this->content = $this->Template('v/v_checkout.php', array('text' => $info,'message' => $this->name));
 		}//v/v_checkout.php   v/v_auth.php
-		print_r($_POST);
-		print_r($_SESSION);
+		
 	}
+	
 	//переход на страницу регистрации
 	public function action_registr(){
 		$this->title .= '::Регистрация';
@@ -77,11 +76,9 @@ class C_User extends C_Base {
 	}
 	
 	//обновление страницы авторизации
-	public function update_auth($text){
+	public function update_auth($text="", $message=""){
 		$this->title .= '::Авторизация';
-     
-		
-		return $this->Template('v/v_checkout.php', array('text' => $info,'name' => $text));
+     	return $this->Template('v/v_checkout.php', array('text' => $text,'message' => $message));
 	}
 	
 }

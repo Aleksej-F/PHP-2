@@ -2647,6 +2647,9 @@ input[type=range]::-webkit-slider-thumb {
 .checkout {
   
 }
+.checkout_title{
+  text-align: center;
+}
 .checkout_admin{
   width: 760px;
   justify-content: space-between;

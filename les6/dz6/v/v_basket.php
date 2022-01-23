@@ -47,7 +47,7 @@
                 <div class="shopping-cart_grid_separator"></div>
                 <?php  $total = $total + $reviews['price'] * $reviews['count'];?> 
 			<?php endforeach;}?> 
-				<h3 class="shopping-cart_z"><?=$basketText?></h3>
+				<h3 class="shopping-cart_z" id="baskettext"><?=$basketText?></h3>
 				
             <div class="shopping-cart_button">
 				<div class="shopping-cart_button_1" onclick="clearBasket()">

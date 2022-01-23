@@ -69,8 +69,15 @@ function countBasket(id, count){
 }
 
 function clearBasket() {
+    let pass = document.getElementById('baskettext').outerText;
+    console.dir(pass)
+    console.log(pass.outerText)
+    if (pass !== "") { 
+        alert('Корзина пуста')
+        return 
+    }
     let action = 'clearBasket';
-    let str = 'action='+action;
+    let str = 'action=' + action;
     let confirmation = confirm("Вы действительно хотите очистить корзину?");
     if (confirmation) {
         $.ajax({
@@ -105,8 +112,7 @@ function logIn(){
         url: "server.php",
         data: str,
         success: function(answer){
-          console.log(answer)
-          $('#content').html(answer);  
+            $('#content').html(answer);  
         }
     });
 
@@ -124,7 +130,7 @@ function goOut(){
         url: "server.php",
         data: str,
         success: function(answer){
-          $('body').html(answer);  
+            $('#content').html(answer);   
         }
     });
 

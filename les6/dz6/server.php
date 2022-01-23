@@ -78,7 +78,9 @@ switch($action){
     
     case "goOut":
         $_SESSION = [];
-        header("Location: checkout.php?success=false");
+        $rez ="Вы не авторизованы.<br> Пройдите регистрацию или авторизуйтесь!";
+        $text = $controlsUser->update_auth($rez, '');
+        echo $text;
     break;
 
     default:

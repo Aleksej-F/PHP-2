@@ -23,13 +23,13 @@
 						</div>
 					</div>
 					<div class="product-cont-elem-text">
-              		<a href="index.php?c=details&act=details&id=<?=$data['id']?>" class="product-cont-elem-text-a">
+              		<a href="index.php?c=product&act=details&id=<?=$data['id']?>" class="product-cont-elem-text-a">
 							<p class="product-cont-img-p1"><?=$data['title']?></p>
 						</a>
 						<div class="product-cont-elem-text-admin">
 							<p class="product-cont-img-p2">$<?=$data['price']?>.00</p>
 							<? if (isset($_SESSION['userRights']) && $_SESSION['userRights']==='admin'): ?>
-								<a href="editproduct.php?action=editproduct&id=<?=$data['id']?>">
+								<a href="index.php?c=product&act=editproduct&id=<?=$data['id']?>">
 									<div class="product-cont-elem-text-admin-a">
 										<p >Edit</p>
 									</div>
@@ -40,13 +40,10 @@
 					</div>
 				</div>
 		<?php endforeach;}?>
-			
-			
-			
-					<a href="#" class="button">
+				
+	</div>
+	<a href="#" class="button">
 							Browse All Product
 							<i class="fa fa-long-arrow-right" aria-hidden="true"></i>
 					</a>
-				
-	</div>
 </section>

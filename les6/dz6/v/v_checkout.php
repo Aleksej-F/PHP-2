@@ -14,7 +14,10 @@
 
 		<section class="checkout">
 			<div class="wrap checkout_wrap">
-				<h3 class="checkout__block-form-h3"><?=$text?></h3><Br><Br>
+				<div class="checkout_title">
+					<h3 class="checkout__block-form-h3"><?=$text?></h3><Br><Br>
+				</div>
+				
 				<?php
 				
 				if(isset($_SESSION['userRights']) && $_SESSION['userRights']==='admin'):?>

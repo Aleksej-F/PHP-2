@@ -1,7 +1,7 @@
 <footer>
 			<div class="wrap wrap-footer">
 				<div class="footer-1">
-					<a href="index.html" class="logo">
+					<a href="index.php" class="logo">
 							<img src="img/group_2_18.png" alt="" class="img-logo">
 							<p class="text-logo">BRAN</p>
 							<p class="text-logo text-logo-D">D</p>
