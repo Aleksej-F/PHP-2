@@ -2,8 +2,6 @@
 session_start();
 
 // Конттроллер страницы пользователя.
-//include_once('c/C_Base.php');
-//include_once('m/M_User.php');
 
 class C_User extends C_Base {
 	private $name = " ";

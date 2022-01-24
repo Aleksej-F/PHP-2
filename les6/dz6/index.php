@@ -28,6 +28,9 @@ switch ($_GET['c'])
 	case 'product':
 		$controller = new C_Product();
 		break;
+	case 'order':
+		$controller = new C_Order();
+		break;
 	default:
 		$controller = new C_Catalog();
 }

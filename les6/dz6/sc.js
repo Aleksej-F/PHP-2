@@ -95,9 +95,10 @@ function clearBasket() {
 function сontinueСheckout() {
     const rr =$('input[name=reg]:checked', '#formCheckout').val()
     if (rr ==="reg" ) {
-        $('#сontСheckt').attr("href", "register.php")
+        $('#сontСheckt').attr("href", "index.php?c=User&act=registr")
     }else {
         //переход на страницу оформления заказа без регистрации
+        $('#сontСheckt').attr("href", "index.php?c=order&act=makingorder")
     }
 }
 

@@ -61,7 +61,7 @@
 					<details open>
 						<summary class="shopping-cart_z">01.&nbsp;&nbsp;&nbsp;Shipping Adress</summary>
 							<div class="checkout_summary_cont">
-								<form name="test" method="post" id="formCheckout" >
+								<form name="test" method="post" id="formCheckout" onclick="сontinueСheckout()">
 									<h3 class="shopping-cart_z_4">Check as a guest or register</h3>
 									<b class="shopping-cart_z_5">Register with us for future convenience</b>
 									<Br><Br>
