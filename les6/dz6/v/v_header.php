@@ -1,3 +1,9 @@
+<?php
+/**
+ * Шаблон шапки страниц
+ * ================
+ */
+?>
 <header class="header">
 			<div class="wrap header-wrap">
 				<a href="index.php" class="logo">

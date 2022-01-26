@@ -1,4 +1,9 @@
-
+<?php
+/**
+ * Шаблон отображающий подробную информацию о товаре
+ * ================
+ */
+?>
 <div class="details-product-cont-elem">
     <div class="details-product-cont-elem-heder">
         <h1 ><?=$data['title']?></h1>

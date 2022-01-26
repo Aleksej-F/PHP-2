@@ -6,6 +6,7 @@ session_start();
 class C_User extends C_Base {
 	private $name = " ";
 	
+	//переход на страницу авторизации
 	public function action_auth(){
 		$user = new M_User();
 		if($_POST){
@@ -39,7 +40,7 @@ class C_User extends C_Base {
 		$this->title .= '::Регистрация';
       $user = new M_User();
 		
-		
+		//если на странице регистрации происходит POST запрос
 		if($_POST){
 			//запрос на регистрацию
 			if($_POST['registr']){
@@ -68,7 +69,7 @@ class C_User extends C_Base {
 			}
 
 		}
-
+		//отрисовка страницы регистрации при переходе на нее
 		$this->content = $this->Template('v/v_register.php', array('text' => $info,'name' => $this->name));
 	
 	}

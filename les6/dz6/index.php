@@ -35,23 +35,25 @@ switch ($_GET['c'])
 		$controller = new C_Catalog();
 }
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
-switch ($_POST['c'])
-{
-	case 'basket':
-		$controller = new C_Basket();
-		break;
-	case 'User':
-		$controller = new C_User();
-		break;
-	case 'product':
-		if (isset($_POST['act'])) {
-			$action = 'action_'.$_POST['act'];
-		}
-		$controller = new C_Product();
-		break;
-	default:
-		$controller = new C_Catalog();
-}}
+	if (isset($_POST['act'])) {
+		$action = 'action_'.$_POST['act'];
+	}
+	switch ($_POST['c'])
+	{
+		case 'basket':
+			$controller = new C_Basket();
+			break;
+		case 'User':
+			$controller = new C_User();
+			break;
+		case 'product':
+			$controller = new C_Product();
+			break;
+		case 'order':
+			$controller = new C_Order();
+			break;
+	}
+}
 
 
 $controller->Request($action);

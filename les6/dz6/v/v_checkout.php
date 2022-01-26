@@ -52,12 +52,13 @@
 						<div class="shopping-cart_button_5" onclick="goOut()">
 							<p>Go out</p>
 						</div>
-						<div class="shopping-cart_button_5" onclick="">
-							<p>Place an order</p>
-						</div>
-					
+						<a href="index.php?c=order&act=makingorder" >
+							<div class="shopping-cart_button_5" onclick="">
+								<p>Place an order</p>
+							</div>
+						</a>
 
-				<? else: ?>
+				<? else:?>
 					<details open>
 						<summary class="shopping-cart_z">01.&nbsp;&nbsp;&nbsp;Shipping Adress</summary>
 							<div class="checkout_summary_cont">

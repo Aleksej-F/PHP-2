@@ -1,3 +1,9 @@
+<?php
+/**
+ * Шаблон страницы регистрации
+ * ================
+ */
+?>
 <section class="checkout">
 		<div class="wrap checkout_wrap">
 		<?		
@@ -75,4 +81,4 @@
 		<? } ?>
 		</div>
 
-	</section>
+</section>

@@ -43,7 +43,7 @@
 				
 	</div>
 	<a href="#" class="button">
-							Browse All Product
-							<i class="fa fa-long-arrow-right" aria-hidden="true"></i>
-					</a>
+		Browse All Product
+		<i class="fa fa-long-arrow-right" aria-hidden="true"></i>
+	</a>
 </section>

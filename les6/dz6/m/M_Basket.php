@@ -13,7 +13,7 @@ class M_Basket {
       $this->idUser = $_SESSION['userId']? $_SESSION['userId']:0;
    }
    
-   //запрос состаяний корзины
+   //запрос состояний корзины
    function basket($idUser) {
       $sql="SELECT basket.id_product, basket.count, product.description, product.price, product.img, product.title FROM `basket`JOIN `product` ON basket.id_product = product.id WHERE basket.id_user = $idUser;";
       $connect = $this->config->connectingPDO();
@@ -22,6 +22,7 @@ class M_Basket {
       return $basket;
    }
 
+   //запрос на добавление товара в корзину
    function basketAddProduct($id, $idUser) {
       $sql = "select id from basket where id_user=$idUser and id_product=$id;";
       $connect = $this->config->connectingPDO();
@@ -44,37 +45,35 @@ class M_Basket {
       }
    }
 
+   //удаление товара из корзины
    function basketDel($id, $idUser){
       $sql = "DELETE FROM `basket` WHERE id_user=$idUser and id_product=$id";
       $connect = $this->config->connectingPDO();
       $connect->exec($sql);
    }
 
+   // очистка корзины 
    function basketClear($idUser){
       $sql = "DELETE FROM `basket` WHERE `basket`.`id_user` = $idUser";
       $connect = $this->config->connectingPDO();
       $res = $connect->exec($sql);
    }
 
+   // изменение количества товара данного наименования
    function basketCount($idUser,$id,$count){
-      
       $connect = $this->config->connectingPDO();
-         if ($count>0){
-            $sql = "UPDATE `basket` SET `count` = $count WHERE id_user=$idUser and id_product=$id;";
-            $connect->query($sql);
-            //echo "колличество товаров изменено!";
-         } else {
-            $sql = "DELETE FROM `basket` WHERE id_user=$idUser and id_product=$id";
-            $res = $connect->exec($sql);
-            //$this->config->ConsoleAlert($res);
-            return "товар удален из корзины корзину";
+      if ($count>0){
+         $sql = "UPDATE `basket` SET `count` = $count WHERE id_user=$idUser and id_product=$id;";
+         $connect->query($sql);
+         //echo "колличество товаров изменено!";
+      } else {
+         $sql = "DELETE FROM `basket` WHERE id_user=$idUser and id_product=$id";
+         $res = $connect->exec($sql);
+         //$this->config->ConsoleAlert($res);
+         return "товар удален из корзины корзину";
 
-         }
-         
-     
-
-    }
-
+      }
+   }
 }
 
 

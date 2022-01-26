@@ -1,3 +1,9 @@
+<?php
+/**
+ * Шаблон для админа. Редактирование информации о товаре.
+ * ================
+ */
+?>
 <div class="details-product-cont-elem">
     <form method="post" enctype="multipart/form-data">    
         <div class="details-product-cont-elem-heder">

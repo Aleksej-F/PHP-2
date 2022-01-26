@@ -2449,7 +2449,7 @@ input[type=range]::-webkit-slider-thumb {
   cursor: pointer;
   -webkit-transition: all 0.5s;
   transition: all 0.5s;
-  margin-top: 50px;
+  margin: 50px 10px 0  0;
   transition: all 0.5s;
 }
 
@@ -2466,6 +2466,14 @@ input[type=range]::-webkit-slider-thumb {
 .shopping-cart_button_5:hover {
   border: 1px solid #3a3939;
 }
+
+.shopping-cart_button_5.but{font-size: 14px;
+  font-family: Lato;
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: 0.025em;
+  text-transform: uppercase;
+  color: #4a4a4a;}
 
 /******************кнопки*/
 .shopping-cart_form {

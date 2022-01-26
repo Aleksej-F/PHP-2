@@ -1,3 +1,9 @@
+<?php
+/**
+ * Шаблон корзины
+ * ================
+ */
+?>
 <section class="shopping-cart">
 		<div class="wrap shopping-cart_wrap">
 			<div class="shopping-cart_grid">

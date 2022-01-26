@@ -56,11 +56,11 @@ class M_User {
             return  'Пользователь с таким логином не зарегистрирован!';
         }
     }
-
+    // выход личного кабинета
     function goout(){
         $_SESSION = [];
     }
-
+    //регистрация нового пользователя
     function getUserRegistr($name, $surname, $phone ,$email, $pass) {
         $pass = $this -> passv($pass);
         $sql = "INSERT INTO `user` (`id`, `name`, `surname`,`phone`, `password`, `mail`, `rights`) VALUES (NULL, '$name','$surname','$phone','$pass','$email','user')"; 
@@ -83,7 +83,7 @@ class M_User {
         $rnd = rand(1000,5000);
         $name = "$rnd-".date("w").time();
         $sql = "INSERT INTO `user` (`id`, `name`, `surname`, `password`, `phone`, `mail`, `rights`) VALUES (NULL, $name, '1','1', '1','1','guest')"; 
-           print_r('</br>'.'создаю гостевую запись'.'</br>'); 
+        print_r('</br>'.'создаю гостевую запись'.'</br>'); 
            
         $connect = $this->config->connectingPDO();
         $q = $connect->query($sql);
@@ -92,7 +92,7 @@ class M_User {
             $info = $q->errorInfo();
             die($info[2]);
         }
-        $sql = "select id, rights from user where name=$name and rights='guest'";
+        $sql = "SELECT id, rights FROM user WHERE name=$name and rights='guest'";
         $user = $connect->query($sql)->fetch();
         print_r($user);
         if($user){
@@ -102,13 +102,11 @@ class M_User {
         print_r($_SESSION);
     }
 
-    //проверка email пользователя
+    //проверка email пользователя на существование в БД
     function getUserRegMail($mail){
         $sql = "SELECT id FROM `user` WHERE mail='$mail'";
         $connect = $this->config->connectingPDO();
         $res = $connect->query($sql)->fetch();
-       
-        
         return $res;
     }
 

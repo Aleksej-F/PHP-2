@@ -1,3 +1,9 @@
+<?php
+/**
+ * Шаблон футэра
+ * ================
+ */
+?>
 <footer>
 			<div class="wrap wrap-footer">
 				<div class="footer-1">
