@@ -2204,6 +2204,15 @@ input[type=range]::-webkit-slider-thumb {
 .shopping-cart_grid {
   display: -ms-grid;
   display: grid;
+  -ms-grid-columns: 123px 480px 120px 120px 120px 120px 55px;
+  grid-template-columns: 123px 480px 120px 120px 120px 120px 55px;
+  -ms-grid-rows: 1fr;
+      grid-template-rows: 1fr;
+}
+
+.shopping-cart_grid_admin {
+  display: -ms-grid;
+  display: grid;
   -ms-grid-columns: 63px 350px 120px 160px 298px 120px ;
       grid-template-columns: 63px 350px 120px 160px 298px 120px ;
   -ms-grid-rows: 1fr;
