@@ -34,6 +34,7 @@ switch ($_GET['c'])
 	default:
 		$controller = new C_Catalog();
 }
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST'){
 	if (isset($_POST['act'])) {
 		$action = 'action_'.$_POST['act'];

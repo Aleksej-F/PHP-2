@@ -17,9 +17,12 @@ class M_Basket {
    function basket($idUser) {
       $sql="SELECT basket.id_product, basket.count, product.description, product.price, product.img, product.title FROM `basket`JOIN `product` ON basket.id_product = product.id WHERE basket.id_user = $idUser;";
       $connect = $this->config->connectingPDO();
-      $basket = $connect->query($sql)->fetchAll();
+      $res = $connect->query($sql);
+      if ($res){
+         $basket = $res->fetchAll();
+         return $basket;
+      }
       
-      return $basket;
    }
 
    //запрос на добавление товара в корзину

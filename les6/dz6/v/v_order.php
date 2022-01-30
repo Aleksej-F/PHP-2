@@ -6,10 +6,13 @@
 ?>
 <section class="checkout">
 	<div class="wrap checkout_wrap">
+		<h3 class="shopping-cart_z"><?=$name?></h3>
+			 <Br> <Br>
 	 	<div class="checkout_summary_cont">
-			<form name="order"  method="post" enctype="multipart/form-data" >
-            <h3 class="shopping-cart_z"><?=$name?></h3>
-				<Br> <Br>
+			 
+		 	<form name="order"  method="post" enctype="multipart/form-data" >
+           
+				
             <input type="hidden" name="registr" value="true">
             <h3 class="shopping-cart_z_4">Please fill in the fields below</h3><Br><Br>
 				<div class="checkout_inp_cont">

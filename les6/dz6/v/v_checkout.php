@@ -24,19 +24,19 @@
 						<h1>Вы вошли с правами администратора!</h1>
 						<div class="checkout_admin">
 							<a href="index.php" id="сontСheckt">
-								<div class="shopping-cart_button_5" onclick="сontinueСheckout()">
+								<div class="shopping-cart_button_5" >
 									<p>Catalog</p>
 								</div>
 							</a>
 
-							<a href="#" id="сontСheckt">
-								<div class="shopping-cart_button_5" onclick="сontinueСheckout()">
+							<a href="index.php?c=order&act=admin_orders">
+								<div class="shopping-cart_button_5" >
 									<p>Orders</p>
 								</div>
 							</a>
 							
 							<a href="#" id="сontСheckt">
-								<div class="shopping-cart_button_5" onclick="сontinueСheckout()">
+								<div class="shopping-cart_button_5" >
 									<p>users</p>
 								</div>
 							</a>

@@ -65,7 +65,7 @@ switch($action){
     break;    
 
     case "clearBasket":
-        $basket->basketClear();
+        $basket->basketClear($idUser);
         $text = $controls->update_basket();
         echo $text;
     break;  

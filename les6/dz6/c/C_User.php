@@ -80,4 +80,5 @@ class C_User extends C_Base {
      	return $this->Template('v/v_checkout.php', array('text' => $text,'message' => $message));
 	}
 	
+	
 }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Хост: 127.0.0.1:3306
--- Время создания: Янв 18 2022 г., 00:35
+-- Время создания: Янв 30 2022 г., 18:30
 -- Версия сервера: 5.7.33
 -- Версия PHP: 7.4.21
 
@@ -100,9 +100,6 @@ INSERT INTO `basket` (`id`, `id_user`, `id_product`, `count`) VALUES
 (151, 43, 7, 1),
 (152, 43, 8, 1),
 (153, 43, 5, 1),
-(159, 3, 8, 5),
-(160, 3, 6, 5),
-(161, 3, 5, 4),
 (162, 44, 3, 6),
 (163, 44, 6, 2),
 (164, 44, 7, 1),
@@ -125,7 +122,88 @@ INSERT INTO `basket` (`id`, `id_user`, `id_product`, `count`) VALUES
 (181, 49, 6, 1),
 (182, 49, 7, 1),
 (183, 49, 8, 1),
-(184, 50, 1, 1);
+(184, 50, 1, 1),
+(185, 51, 2, 13),
+(186, 51, 3, 10),
+(187, 51, 8, 1),
+(188, 51, 1, 1),
+(189, 51, 7, 1),
+(190, 51, 4, 1),
+(240, 163, 8, 1),
+(241, 163, 7, 2),
+(242, 163, 6, 2),
+(243, 163, 5, 1),
+(255, 209, 2, 7),
+(271, 219, 2, 1),
+(272, 219, 3, 7),
+(273, 219, 4, 1),
+(274, 219, 8, 1),
+(275, 220, 2, 1),
+(276, 220, 3, 1),
+(277, 221, 1, 1),
+(278, 221, 2, 1),
+(279, 221, 3, 1),
+(280, 221, 4, 1),
+(281, 222, 2, 1),
+(286, 217, 3, 1),
+(287, 217, 2, 1),
+(288, 217, 3, 1),
+(289, 217, 4, 1),
+(290, 217, 1, 1),
+(329, 3, 2, 1),
+(331, 3, 4, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `delivery_address`
+--
+
+CREATE TABLE `delivery_address` (
+  `id` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `city` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `street` varchar(20) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `house` varchar(5) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `flat` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Дамп данных таблицы `delivery_address`
+--
+
+INSERT INTO `delivery_address` (`id`, `id_user`, `city`, `street`, `house`, `flat`) VALUES
+(2, 227, 'Овчинникова', 'fdgdf', '10dfg', 434),
+(3, 42, 'апр', 'апр', 'а', 2);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `order_information`
+--
+
+CREATE TABLE `order_information` (
+  `id` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  `order_number` int(11) NOT NULL,
+  `status` text COLLATE utf8_unicode_ci NOT NULL,
+  `delivery_address` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Дамп данных таблицы `order_information`
+--
+
+INSERT INTO `order_information` (`id`, `id_user`, `order_number`, `status`, `delivery_address`) VALUES
+(1, 55, 1, 'rtert', 10),
+(2, 55, 2, 'erwerwer', 10),
+(3, 56, 1, 'dfgd', 10),
+(4, 56, 2, 'fgdfg', 10),
+(5, 56, 3, 'fgdfg', 10),
+(6, 77, 1, 'оплачен', 11),
+(11, 42, 1, 'оплачен', 3),
+(12, 42, 2, 'оплачен', 3),
+(13, 42, 3, 'оплачен', 3);
 
 -- --------------------------------------------------------
 
@@ -148,14 +226,49 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`id`, `title`, `size`, `price`, `img`, `description`, `count`) VALUES
-(1, '$title', 10, 523, 'rectangle_5_copy_3_1209.jpg', '$description', 10),
-(2, 'MANGO PEOPLE T-SHIRT5555', 10, 545, 'rectangle_5_copy_1193.jpg', 'dfgdfgdfgdfgd fgbvxcvbcvb cvbcvbeertjghjghjkkk kkkkkkkkkkkkkkkkkkkkkkkkkkkk kkkkkkkkkkkkkkkkkkk kkkkkkkkkkkk kkkkkkkkk\r\nkkkkkkkkkk\r\nkkkkkkkkkk\r\nfghfgh\r\nfghfghfh dfgdfgdfg ghjghj', 10),
+(1, 'куртка мужская', 10, 725, 'rectangle_5_copy_3_1209.jpg', 'dfdfgdfcxvbbcvb\r\ndfgdfgdfg\r\nxcxcvxcvzxc\r\nsdfdsdfsgdfg\r\nxcvxcvxv \r\nghjghjgghj\r\nhgjghjghj', 10),
+(2, 'MANGO PEOPLE T-SHIRT5555', 10, 545, 'rectangle_5_copy_1193.jpg', 'dfgdfgdfgdfgd fgbvxcvbcvb cvbcvbeertjghjghjkkk kkkkkkkkkkkkkkkkkkkkkkkkkkkk kkkkkkkkkkkkkkkkkkk kkkkkkkkkkkk kkkkkkkkk\r\nkkkkkkkkkk\r\nkkkkkkkkkk\r\nfghfgh\r\nfghfghfh dfgdfgdfg ghjghj ghfghfghfghfgh', 10),
 (3, 'MANGO PEOPLE T-SHIRT', 10, 54, 'rectangle_5_copy_1201.jpg', 'ggggg ggggg ggggg ggggg ggggg ggggg ggggg ggggg ggggg ggggg ggggg ggggg ggggg ggggg ggggg', 15),
 (4, 'MANGO PEOPLE T-SHIRT', 10, 55, 'rectangle_5_copy_1240.jpg', 'ggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg', 15),
 (5, 'MANGO PEOPLE T-SHIRT', 10, 56, 'rectangle_5_copy_1248.jpg', 'ggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg', 15),
 (6, 'MANGO PEOPLE T-SHIRT', 10, 57, 'rectangle_5_copy_1256.jpg', 'ggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg', 15),
 (7, 'MANGO PEOPLE T-SHIRT', 10, 589, 'rectangle_5_copy_1264.jpg', 'ggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg', 15),
 (8, 'MANGO PEOPLE T-SHIRT', 10, 59, 'rectangle_5_copy_1272.jpg', 'ggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg', 15);
+
+-- --------------------------------------------------------
+
+--
+-- Структура таблицы `purchases`
+--
+
+CREATE TABLE `purchases` (
+  `id` int(11) NOT NULL,
+  `id_order` int(11) NOT NULL,
+  `id_product` int(11) NOT NULL,
+  `count` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Дамп данных таблицы `purchases`
+--
+
+INSERT INTO `purchases` (`id`, `id_order`, `id_product`, `count`) VALUES
+(1, 1, 1, 2),
+(2, 1, 2, 3),
+(3, 24, 1, 1),
+(4, 24, 2, 1),
+(5, 24, 7, 1),
+(6, 24, 8, 1),
+(7, 26, 2, 1),
+(8, 26, 3, 1),
+(9, 26, 4, 1),
+(10, 29, 2, 1),
+(11, 29, 3, 1),
+(12, 29, 4, 1),
+(13, 29, 8, 1),
+(14, 29, 7, 1),
+(15, 29, 6, 1),
+(16, 29, 5, 1);
 
 -- --------------------------------------------------------
 
@@ -257,18 +370,27 @@ INSERT INTO `user` (`id`, `name`, `surname`, `password`, `phone`, `mail`, `right
 (23, 'ertert', 'ertert', 'sldfjsklfdj23lfd0,.sd8e80d2035142b70ec6083887e1815994sldfjsklfdj23lfd0,.sd', 'ertert', 'weqw@qwerr', 'user'),
 (24, 'wer', 'wer', 'sldfjsklfdj23lfd0,.sd8e80d2035142b70ec6083887e1815994sldfjsklfdj23lfd0,.sd', '324234', 'ewrwe@sdfsdf', 'user'),
 (33, 'dfgdfg', 'dfg', 'sldfjsklfdj23lfd0,.sd8e80d2035142b70ec6083887e1815994sldfjsklfdj23lfd0,.sd', '345345', 'dgdfg@dsfsdf', 'user'),
-(40, '279001639337475', '1', '1', '1', '1', 'guest'),
-(41, '231101639341009', '1', '1', '1', '1', 'guest'),
 (42, 'ertert', 'ertert', 'sldfjsklfdj23lfd0,.sd8e80d2035142b70ec6083887e1815994sldfjsklfdj23lfd0,.sd', '345345345', 'ertert@wewr', 'user'),
-(43, '108411639415954', '1', '1', '1', '1', 'guest'),
-(44, '258241639686025', '1', '1', '1', '1', 'guest'),
-(45, '406151639756257', '1', '1', '1', '1', 'guest'),
 (46, 'qwer', 'qweqwe', 'sldfjsklfdj23lfd0,.sd8e80d2035142b70ec6083887e1815994sldfjsklfdj23lfd0,.sd', '234234234', 'wqweqr@reter.ru', 'user'),
 (47, 'werwer', 'werwer', 'sldfjsklfdj23lfd0,.sd8e80d2035142b70ec6083887e1815994sldfjsklfdj23lfd0,.sd', '234234', 'werwer@ertert.ru', 'user'),
-(48, '365451640902929', '1', '1', '1', '1', 'guest'),
-(49, '466511642367080', '1', '1', '1', '1', 'guest'),
-(50, '230811642444330', '1', '1', '1', '1', 'guest'),
-(51, 'Андрей', 'Беркин', 'sldfjsklfdj23lfd0,.sd8e80d2035142b70ec6083887e1815994sldfjsklfdj23lfd0,.sd', NULL, 'werwer@ut.ru', 'user');
+(209, 'fghfgh', 'fghfgh', 'sldfjsklfdj23lfd0,.sd8e80d2035142b70ec6083887e1815994sldfjsklfdj23lfd0,.sd', '5456456456', 'fghfgh@ertefffrt.ru', 'user'),
+(210, 'gfghfgh', 'fghfgh', 'sldfjsklfdj23lfd0,.sd8e80d2035142b70ec6083887e1815994sldfjsklfdj23lfd0,.sd', '345345345', 'ewrwerwe@tytyu.ru', 'user'),
+(211, 'dfg', 'dfgdfg', 'sldfjsklfdj23lfd0,.sd8e80d2035142b70ec6083887e1815994sldfjsklfdj23lfd0,.sd', '5645645', 'rtyrtyr@tyrty.ty', 'user'),
+(212, 'weqwe', 'asdasd', 'sldfjsklfdj23lfd0,.sd8e80d2035142b70ec6083887e1815994sldfjsklfdj23lfd0,.sd', '4534534', 'qeqwe@tyuty.yu', 'user'),
+(213, 'йцуйцу', 'цуйцу', 'sldfjsklfdj23lfd0,.sd8e80d2035142b70ec6083887e1815994sldfjsklfdj23lfd0,.sd', '234234', 'qweqwe@rt.ru', 'user'),
+(214, 'dfgdfg', 'dfgdfg', 'sldfjsklfdj23lfd0,.sd8e80d2035142b70ec6083887e1815994sldfjsklfdj23lfd0,.sd', '546456546', 'dgdfgdfg@yyuyu.yu', 'user'),
+(215, 'retert', 'ertert', 'sldfjsklfdj23lfd0,.sd8e80d2035142b70ec6083887e1815994sldfjsklfdj23lfd0,.sd', '5345345', 'fdgdfgd@gh.tu', 'user'),
+(216, 'dsdf', 'sdfsdf', 'sldfjsklfdj23lfd0,.sd8e80d2035142b70ec6083887e1815994sldfjsklfdj23lfd0,.sd', '34534534', 'fdgdfgd@grtrrth.tu', 'user'),
+(217, 'ertert', 'ertert', 'sldfjsklfdj23lfd0,.sd8e80d2035142b70ec6083887e1815994sldfjsklfdj23lfd0,.sd', '345345', 'fdgdfgd@rrrrrrgh.tu', 'user'),
+(219, '-1642889868', '1', '1', '1', '1', 'guest'),
+(220, '-1642888605', '1', '1', '1', '1', 'guest'),
+(221, '-1642890063', '1', '1', '1', '1', 'guest'),
+(222, '-1642890541', '1', '1', '1', '1', 'guest'),
+(223, '-1642889996', '1', '1', '1', '1', 'guest'),
+(224, 'вапвап', 'вапвапвапукеуке', 'sldfjsklfdj23lfd0,.sd8e80d2035142b70ec6083887e1815994sldfjsklfdj23lfd0,.sd', '45345345', 'qedfgdfg@ttt.ru', 'user'),
+(225, '-21643141681', '1', '1', '1', '1', 'guest'),
+(226, '-31643220033', '1', '1', '1', '1', 'guest'),
+(227, '-31643223470', '1', '1', '1', '1', 'guest');
 
 --
 -- Индексы сохранённых таблиц
@@ -281,9 +403,27 @@ ALTER TABLE `basket`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Индексы таблицы `delivery_address`
+--
+ALTER TABLE `delivery_address`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `order_information`
+--
+ALTER TABLE `order_information`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Индексы таблицы `product`
 --
 ALTER TABLE `product`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Индексы таблицы `purchases`
+--
+ALTER TABLE `purchases`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -306,13 +446,31 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT для таблицы `basket`
 --
 ALTER TABLE `basket`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=185;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=332;
+
+--
+-- AUTO_INCREMENT для таблицы `delivery_address`
+--
+ALTER TABLE `delivery_address`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT для таблицы `order_information`
+--
+ALTER TABLE `order_information`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT для таблицы `product`
 --
 ALTER TABLE `product`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT для таблицы `purchases`
+--
+ALTER TABLE `purchases`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT для таблицы `reviews`
@@ -324,7 +482,7 @@ ALTER TABLE `reviews`
 -- AUTO_INCREMENT для таблицы `user`
 --
 ALTER TABLE `user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=228;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
