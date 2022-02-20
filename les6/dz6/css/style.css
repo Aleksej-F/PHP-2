@@ -1,0 +1,112 @@
+
+
+*{
+	padding: 0;
+	margin: 0;
+}
+
+a
+{
+	color: #00f;
+}
+
+a:hover
+{
+	color: #f00;
+}
+
+textarea
+{
+	width: 100%;
+	height: 300px;
+}
+
+
+
+#menu
+{
+	padding: 10px;
+	background: #ccc;
+	text-align: center;
+}
+.menu_hed{
+	text-align:left;
+}
+.wrap_menu{
+	width: 1140px;
+    margin: 0 auto;
+}
+
+.checkout__head{
+	text-align: center;
+}
+
+.checkout__block{
+	display: flex;
+	justify-content: center;
+}
+
+.checkout__block-form{
+	margin: 10px 54px;
+   width: 400px;
+}
+
+.checkout__block-form-h3{
+	font-size: 20px;
+}
+
+.checkout_inp_forgot{
+	margin-top: 20px;
+	width: 350px;
+	display: flex;
+}
+
+.checkout__block-form-button{
+	width: 180px;
+  height: 40px;
+  background-color: #ffffff;
+  border: 1px solid #eaeaea;
+  text-decoration: none;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  cursor: pointer;
+  -webkit-transition: all 0.5s;
+  transition: all 0.5s;
+  margin-top: 38px;
+  transition: all 0.5s;
+  font-size: 14px;
+	font-family: Lato;
+	line-height: 1.2;
+	font-weight: 700;
+	letter-spacing: 0.025em;
+	text-transform: uppercase;
+	color: #4a4a4a;
+}
+
+.checkout__block-form-button p{
+	font-size: 14px;
+	font-family: Lato;
+	line-height: 1.2;
+	font-weight: 700;
+	letter-spacing: 0.025em;
+	text-transform: uppercase;
+	color: #4a4a4a;
+}
+
+.checkout__block-form-button:hover{
+	cursor: pointer;
+	border: 1px solid #181818;
+}
+
+.checkout_inp_cont{
+	margin-top: 10px;
+}
+
+
